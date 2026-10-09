@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://plmg-law.com/sitemap.xml
