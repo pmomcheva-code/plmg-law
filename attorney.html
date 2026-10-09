@@ -45,6 +45,18 @@ body[data-page="attorney"] .profile-bottom .profile-cta{color:#634c2d}
 @media(max-width:800px){body[data-page="attorney"] .profile-hero{padding:65px 25px}body[data-page="attorney"] .profile-intro,body[data-page="attorney"] .expert-grid,body[data-page="attorney"] .profile-chronology{grid-template-columns:1fr}body[data-page="attorney"] .profile-intro{gap:25px}body[data-page="attorney"] .profile-intro img{height:330px}body[data-page="attorney"] .profile-wrap{padding:55px 24px}}
 body[data-page="attorney"] .profile-intro img{height:530px;object-position:center 38%}
 @media(max-width:800px){body[data-page="attorney"] .profile-intro img{height:440px}}
+
+/* Mobile-only portrait background for the Attorney page hero. */
+@media (max-width:800px){
+ body[data-page="attorney"] .profile-hero{
+   background-image:linear-gradient(90deg,rgba(10,31,25,.91) 0%,rgba(10,31,25,.79) 55%,rgba(10,31,25,.65) 100%),url("plmg-window.png");
+   background-size:cover;
+   background-position:center,center 28%;
+   background-repeat:no-repeat;
+   min-height:490px;
+ }
+ body[data-page="attorney"] .profile-hero > *{position:relative;z-index:1}
+}
 </style>
 <link rel="canonical" href="https://plmg-law.com/attorney.html">
 </head>
