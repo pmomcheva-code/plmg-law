@@ -64,6 +64,16 @@ body[data-page="attorney"] .profile-window-mobile{display:none}
  body[data-page="attorney"] .profile-window-mobile{display:block;margin:0;padding:34px 24px 40px;background:#f6f0e8}
  body[data-page="attorney"] .profile-window-mobile img{display:block;width:100%;height:auto;max-height:none;object-fit:contain;border-radius:2px;box-shadow:0 12px 32px rgba(16,43,34,.12)}
 }
+
+/* Selected insolvency matters — attorney page only */
+body[data-page="attorney"] .profile-cases{background:#f4eee5;padding:75px 26px}
+body[data-page="attorney"] .profile-cases-inner{max-width:1180px;margin:auto}
+body[data-page="attorney"] .profile-case-list{display:grid;gap:12px;margin-top:30px}
+body[data-page="attorney"] .profile-case{border:1px solid #d5c6af;background:#f8f3ec}
+body[data-page="attorney"] .profile-case summary{cursor:pointer;padding:20px 25px;font-size:21px;line-height:1.4;color:#20382f}
+body[data-page="attorney"] .profile-case summary span{display:block;font:12px Arial,sans-serif;color:#826b48;letter-spacing:.04em;margin-bottom:8px}
+body[data-page="attorney"] .profile-case p{padding:0 25px 22px;margin:0;line-height:1.85;font-size:16px}
+@media(max-width:800px){body[data-page="attorney"] .profile-cases{padding:55px 24px}body[data-page="attorney"] .profile-case summary{font-size:18px;padding:17px}body[data-page="attorney"] .profile-case p{padding:0 17px 20px}}
 </style>
 <link rel="canonical" href="https://plmg-law.com/attorney.html">
 </head>
@@ -84,6 +94,7 @@ body[data-page="attorney"] .profile-window-mobile{display:none}
 --></div></section>
 <section class="profile-wrap"><div class="profile-kicker" data-bg="ПРОФЕСИОНАЛНА ПРАКТИКА" data-en="PROFESSIONAL EXPERIENCE">ПРОФЕСИОНАЛНА ПРАКТИКА</div><h2 class="profile-section-title" data-bg="Правна защита и управление на производства по несъстоятелност" data-en="Legal representation and insolvency proceedings">Правна защита и управление на производства по несъстоятелност</h2><div class="profile-chronology"><article><h3 data-bg="Търговско право и съдебни спорове" data-en="Commercial law and litigation">Търговско право и съдебни спорове</h3><p data-bg="Консултиране и процесуално представителство по търговски и граждански спорове, договорни и корпоративни отношения, както и въпроси с международен търговски елемент." data-en="Advice and representation in commercial and civil disputes, contracts, corporate matters and cross-border commercial issues.">Консултиране и процесуално представителство по търговски и граждански спорове, договорни и корпоративни отношения, както и въпроси с международен търговски елемент.</p></article><article><h3 data-bg="Несъстоятелност и стабилизация" data-en="Insolvency and stabilisation">Несъстоятелност и стабилизация</h3><p data-bg="Установяване на имущество и кредитори; проверка на основанието, размера и реда на удовлетворяване на вземанията; изготвяне на списъци на приети и неприети вземания; попълване на масата чрез искове; осребряване и разпределение на средствата между кредиторите." data-en="Identifying assets and creditors; reviewing the legal basis, amounts and ranking of claims; preparing admitted and rejected claims lists; asset recovery litigation; asset realisation and distributions to creditors.">Установяване на имущество и кредитори; проверка на основанието, размера и реда на удовлетворяване на вземанията; изготвяне на списъци на приети и неприети вземания; попълване на масата чрез искове; осребряване и разпределение на средствата между кредиторите.</p></article></div></section>
 <figure class="profile-window-mobile"><img src="plmg-window.png" alt="Адвокат Пламена Момчева-Георгиева в кантората до прозореца" loading="lazy"></figure>
+<section class="profile-cases"><div class="profile-cases-inner"><div class="profile-kicker" data-bg="ПРАКТИКА КАТО СИНДИК" data-en="INSOLVENCY PRACTICE">ПРАКТИКА КАТО СИНДИК</div><h2 class="profile-section-title" data-bg="Избрани производства по несъстоятелност" data-en="Selected insolvency proceedings">Избрани производства по несъстоятелност</h2><p data-bg="Осем производства в различни икономически сектори, представени с внимание към висящите съдебни спорове." data-en="Eight insolvency appointments across different industries, presented with due regard to ongoing litigation.">Осем производства в различни икономически сектори, представени с внимание към висящите съдебни спорове.</p><div id="plmg-selected-cases" class="profile-case-list"></div></div></section>
 <section class="profile-bottom"><h2 data-bg="Практика като синдик" data-en="Insolvency Track Record">Практика като синдик</h2><p data-bg="Осем назначения в производства по несъстоятелност в различни икономически сектори." data-en="Eight appointments in insolvency proceedings across different industries.">Осем назначения в производства по несъстоятелност в различни икономически сектори.</p><a class="profile-cta" href="insolvency.html" data-bg="РАЗГЛЕДАЙТЕ ПРОИЗВОДСТВАТА →" data-en="EXPLORE THE CASES →">РАЗГЛЕДАЙТЕ ПРОИЗВОДСТВАТА →</a></section>
 </main><footer id="footer"></footer>
 <script>
@@ -110,6 +121,23 @@ const attorneyMarkup = document.getElementById('main').innerHTML;
     main.querySelectorAll('[data-bg][data-en]').forEach(function (element) {
       element.textContent = element.getAttribute('data-' + current);
     });
+    const caseContainer = main.querySelector('#plmg-selected-cases');
+    if (caseContainer) {
+      DATA[current].cases.forEach(function (entry) {
+        const details = document.createElement('details');
+        details.className = 'profile-case';
+        const summary = document.createElement('summary');
+        const category = document.createElement('span');
+        category.textContent = entry[1];
+        summary.appendChild(category);
+        summary.appendChild(document.createTextNode(entry[0]));
+        const paragraph = document.createElement('p');
+        paragraph.textContent = entry[2];
+        details.appendChild(summary);
+        details.appendChild(paragraph);
+        caseContainer.appendChild(details);
+      });
+    }
     document.documentElement.lang = current;
     document.title = seo[current].title;
     document.querySelector('meta[name="description"]').setAttribute('content', seo[current].description);
